@@ -1,0 +1,26 @@
+jenkinsdata:
+ image: iotitude/jenkins-data
+jenkinsslave:
+ image: iotitude/jenkins-slave
+ volumes_from:
+  - jenkinsdata
+ volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
+jenkinsmaster:
+ image: iotitude/jenkins-master
+ volumes_from:
+  - jenkinsdata
+ ports:
+  - "40000:40000"
+  - "49001:8080"
+ links:
+  - jenkinsslave:jenkins-slave
+jenkinsnginx:
+ image: iotitude/jenkins-nginx
+ ports:
+  - "8088:8088"
+ links:
+  - jenkinsmaster:jenkins-master
+
+# command to run
+# docker-compose up -d
