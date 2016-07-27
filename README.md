@@ -2,6 +2,8 @@
 This repository contains Jenkins setup for [dockerized continuous integration.](https://github.com/IoTitude/docker_test_env/)
 See [Wiki](https://github.com/IoTitude/docker_test_env/wiki) for details.
 
+The hosts docker socket needs to be given to the jenkins-slave container as a volume.(-v /var/run/docker.sock:/var/run/docker.sock)  
+Then the slave can use the host machines docker in jenkins build steps.
 
 ## Run with Docker-compose
 Use docker-compose.yml to run Jenkins from ready docker images. It uses:  
@@ -13,7 +15,7 @@ Use docker-compose.yml to run Jenkins from ready docker images. It uses:
 To launch Jenkins in Rancher, use jenkins/rancher_docker-compose.yml.
 
 ## Build from dockerfiles
-This Jenkins setup uses four dockerfiles from IoTitude/Jenkins repository: Jenkins master, slave, data volume and nginx proxy.  
+This Jenkins setup uses four dockerfiles from IoTitude/Jenkins repository: Jenkins master, slave, data volume and nginx proxy.
 
 If you want to pre install Jenkins plugins list them in jenkins/jenkins-master/plugins.txt
 
